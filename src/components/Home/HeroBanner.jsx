@@ -5,15 +5,22 @@ import "slick-carousel/slick/slick-theme.css";
 
 const HeroBanner = () => {
   const [banners, setBanners] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate fetching banner images from an API
-    const mockBannerUrls = [
-      "https://source.unsplash.com/1200x400/?sale",
-      "https://source.unsplash.com/1200x400/?fashion",
-      "https://source.unsplash.com/1200x400/?electronics",
-    ];
-    setBanners(mockBannerUrls);
+    const fetchFeatured = async () => {
+      try {
+        const res = await fetch("http://localhost:5043/api/product/hero-banner"); // Change port if different
+        const data = await res.json();
+        setBanners(data);
+      } catch (err) {
+        console.error("Failed to fetch featured products", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchFeatured();
   }, []);
 
   const settings = {
@@ -27,14 +34,19 @@ const HeroBanner = () => {
     arrows: false,
   };
 
+  if (isLoading) {
+    return <div className="w-full h-[400px] bg-gray-300 animate-pulse rounded"></div>;
+  }
+
   return (
-    <div className="w-full overflow-hidden rounded shadow">
+    <div className="w-full h-[400px] overflow-hidden rounded shadow mb-6">
+
       <Slider {...settings}>
-        {banners.map((url, index) => (
+        {banners.map((product, index) => (
           <div key={index}>
             <img
-              src={url}
-              alt={`Banner ${index + 1}`}
+              src={product.imageUrl}
+              alt={product.name}
               className="w-full h-[400px] object-cover"
               loading="lazy"
             />
