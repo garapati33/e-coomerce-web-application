@@ -1,7 +1,26 @@
 import React from "react";
+import React, { useState } from 'react';
 import { FaSearch, FaShoppingCart, FaMapMarkerAlt } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+   const [searchQuery, setSearchQuery] = useState('');
+
+   const navigate = useNavigate(); 
+
+   const handleSearch = async () => {
+    if (!searchQuery.trim()) return;
+
+    try {
+      const response = await fetch(`http://localhost:5043/api/product/search?query=${encodeURIComponent(searchQuery)}`);
+      const results = await response.json();
+      console.log('Search results:', results);
+      navigate(`/search-results?query=${encodeURIComponent(searchQuery)}`);
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+    }
+  };
+
   return (
     <header className="bg-[#131921] text-white px-4 py-2 flex flex-col md:flex-row items-center justify-between gap-3">
       
@@ -23,15 +42,20 @@ const Header = () => {
 
       {/* Search Bar */}
       <div className="flex flex-grow max-w-3xl w-full">
-        <input
-          type="text"
-          placeholder="Search Amazon"
-          className="flex-grow p-2 rounded-l-md text-white text-sm focus:outline-none"
-        />
-        <button className="bg-yellow-400 p-2 px-4 rounded-r-md">
-          <FaSearch className="text-black" />
-        </button>
-      </div>
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search products"
+        className="flex-grow p-2 rounded-l-md text-black text-sm focus:outline-none"
+      />
+      <button
+        onClick={handleSearch}
+        className="bg-yellow-400 p-2 px-4 rounded-r-md"
+      >
+        <FaSearch className="text-black" />
+      </button>
+    </div>
 
       {/* Right Controls */}
       <div className="flex items-center gap-6 text-sm">
