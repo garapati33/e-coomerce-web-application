@@ -9,6 +9,7 @@ import Footer from './layout/Footer';
 import HeroBanner from './components/Home/HeroBanner';
 import CategoryCardGroup from './components/Home/CategoryCardGroup';
 import CategoryProductsPage from './pages/CategoryProductsPage';
+import SearchResultsPage from './pages/SearchResultPage';
 
 function HomePage() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/category/:categoryName" element={<CategoryProductsPage />} />
+          <Route path="/search-results" element={<SearchResultsPage />} />
         </Routes>
       </div>
     </Router>

@@ -1,4 +1,3 @@
-import React from "react";
 import React, { useState } from 'react';
 import { FaSearch, FaShoppingCart, FaMapMarkerAlt } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
@@ -8,17 +7,9 @@ const Header = () => {
 
    const navigate = useNavigate(); 
 
-   const handleSearch = async () => {
+   const handleSearch = () => {
     if (!searchQuery.trim()) return;
-
-    try {
-      const response = await fetch(`http://localhost:5043/api/product/search?query=${encodeURIComponent(searchQuery)}`);
-      const results = await response.json();
-      console.log('Search results:', results);
-      navigate(`/search-results?query=${encodeURIComponent(searchQuery)}`);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-    }
+    navigate(`/search-results?query=${encodeURIComponent(searchQuery)}`);
   };
 
   return (
