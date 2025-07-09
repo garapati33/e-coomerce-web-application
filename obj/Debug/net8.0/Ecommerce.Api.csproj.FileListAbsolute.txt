@@ -134,3 +134,4 @@ C:\Users\sai\source\repos\Ecommerce.Api\obj\Debug\net8.0\refint\Ecommerce.Api.dl
 C:\Users\sai\source\repos\Ecommerce.Api\obj\Debug\net8.0\Ecommerce.Api.pdb
 C:\Users\sai\source\repos\Ecommerce.Api\obj\Debug\net8.0\Ecommerce.Api.genruntimeconfig.cache
 C:\Users\sai\source\repos\Ecommerce.Api\obj\Debug\net8.0\ref\Ecommerce.Api.dll
+C:\Users\sai\source\repos\Ecommerce.Api\obj\Debug\net8.0\Ecommerce.Api.sourcelink.json
